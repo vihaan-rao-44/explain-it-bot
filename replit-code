@@ -1,0 +1,23 @@
+import openai
+
+client = openai.OpenAI(api_key="Add your key here")
+
+def ask_bot(question):
+    system_msg = "You are a helpful, friendly bot who explains things in simple words for middle school kids."
+
+    response = client.chat.completions.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": system_msg},
+            {"role": "user", "content": question}
+        ]
+    )
+
+    return response.choices[0].message.content
+
+while True:
+    user_input = input("Ask me anything: ")
+    if user_input.lower() == "exit":
+        break
+    answer = ask_bot(user_input)
+    print("\n🤖:", answer)
