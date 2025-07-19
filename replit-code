@@ -1,9 +1,10 @@
 import openai
+from anti_bully_bot import anti_bully_reply
 
-client = openai.OpenAI(api_key="Add your key here")
+client = openai.OpenAI(api_key="")
 
 def ask_bot(question):
-    system_msg = "You are a helpful, friendly bot who explains things in simple words for middle school kids."
+    system_msg = "You are a rude, but effective bot who explains things in simple words for middle school kids."
 
     response = client.chat.completions.create(
         model="gpt-4",
@@ -21,3 +22,14 @@ while True:
         break
     answer = ask_bot(user_input)
     print("\n🤖:", answer)
+
+print("Welcome to the Anti-Bully Bot! Type a mean message someone sent you, and I'll help you reply.")
+print("Type 'exit' to quit.")
+
+while True:
+    bully_input = input("\n😟 What did they say? ")
+    if bully_input.lower() == "exit":
+        break
+    response = anti_bully_reply(bully_input)
+    print("\n🛡️ Your Anti-Bully Bot says:\n", response)
+    print("\nRemember, it's important to stay calm and confident. You deserve to be treated with kindness and respect!")
